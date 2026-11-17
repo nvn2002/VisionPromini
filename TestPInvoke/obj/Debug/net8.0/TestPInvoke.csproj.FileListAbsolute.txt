@@ -1,0 +1,15 @@
+D:\tunvision\mwwz-samples\TestPInvoke\bin\Debug\net8.0\TestPInvoke.exe
+D:\tunvision\mwwz-samples\TestPInvoke\bin\Debug\net8.0\TestPInvoke.deps.json
+D:\tunvision\mwwz-samples\TestPInvoke\bin\Debug\net8.0\TestPInvoke.runtimeconfig.json
+D:\tunvision\mwwz-samples\TestPInvoke\bin\Debug\net8.0\TestPInvoke.dll
+D:\tunvision\mwwz-samples\TestPInvoke\bin\Debug\net8.0\TestPInvoke.pdb
+D:\tunvision\mwwz-samples\TestPInvoke\obj\Debug\net8.0\TestPInvoke.GeneratedMSBuildEditorConfig.editorconfig
+D:\tunvision\mwwz-samples\TestPInvoke\obj\Debug\net8.0\TestPInvoke.AssemblyInfoInputs.cache
+D:\tunvision\mwwz-samples\TestPInvoke\obj\Debug\net8.0\TestPInvoke.AssemblyInfo.cs
+D:\tunvision\mwwz-samples\TestPInvoke\obj\Debug\net8.0\TestPInvoke.csproj.CoreCompileInputs.cache
+D:\tunvision\mwwz-samples\TestPInvoke\obj\Debug\net8.0\TestPInvoke.sourcelink.json
+D:\tunvision\mwwz-samples\TestPInvoke\obj\Debug\net8.0\TestPInvoke.dll
+D:\tunvision\mwwz-samples\TestPInvoke\obj\Debug\net8.0\refint\TestPInvoke.dll
+D:\tunvision\mwwz-samples\TestPInvoke\obj\Debug\net8.0\TestPInvoke.pdb
+D:\tunvision\mwwz-samples\TestPInvoke\obj\Debug\net8.0\TestPInvoke.genruntimeconfig.cache
+D:\tunvision\mwwz-samples\TestPInvoke\obj\Debug\net8.0\ref\TestPInvoke.dll

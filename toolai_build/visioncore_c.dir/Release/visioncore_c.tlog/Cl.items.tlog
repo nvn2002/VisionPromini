@@ -1,0 +1,14 @@
+D:\tunvision\ToolAI\VisionCore\Common\GradientQuantizer.cpp;D:\tunvision\mwwz-samples\toolai_build\visioncore_c.dir\Release\GradientQuantizer.obj
+D:\tunvision\ToolAI\VisionCore\Common\NMS.cpp;D:\tunvision\mwwz-samples\toolai_build\visioncore_c.dir\Release\NMS.obj
+D:\tunvision\ToolAI\VisionCore\Core\VisionTransform.cpp;D:\tunvision\mwwz-samples\toolai_build\visioncore_c.dir\Release\VisionTransform.obj
+D:\tunvision\ToolAI\VisionCore\NCC\NCCMatcher.cpp;D:\tunvision\mwwz-samples\toolai_build\visioncore_c.dir\Release\NCCMatcher.obj
+D:\tunvision\ToolAI\VisionCore\NCC\NCCModel.cpp;D:\tunvision\mwwz-samples\toolai_build\visioncore_c.dir\Release\NCCModel.obj
+D:\tunvision\ToolAI\VisionCore\NCC\NCCPyramidMatcher.cpp;D:\tunvision\mwwz-samples\toolai_build\visioncore_c.dir\Release\NCCPyramidMatcher.obj
+D:\tunvision\ToolAI\VisionCore\PMAlign\CandidateGenerator.cpp;D:\tunvision\mwwz-samples\toolai_build\visioncore_c.dir\Release\CandidateGenerator.obj
+D:\tunvision\ToolAI\VisionCore\PMAlign\ContinuousResponse.cpp;D:\tunvision\mwwz-samples\toolai_build\visioncore_c.dir\Release\ContinuousResponse.obj
+D:\tunvision\ToolAI\VisionCore\PMAlign\PyramidMatcher.cpp;D:\tunvision\mwwz-samples\toolai_build\visioncore_c.dir\Release\PyramidMatcher.obj
+D:\tunvision\ToolAI\VisionCore\PMAlign\ShapeMatcher.cpp;D:\tunvision\mwwz-samples\toolai_build\visioncore_c.dir\Release\ShapeMatcher.obj
+D:\tunvision\ToolAI\VisionCore\PMAlign\ShapeModel.cpp;D:\tunvision\mwwz-samples\toolai_build\visioncore_c.dir\Release\ShapeModel.obj
+D:\tunvision\ToolAI\VisionCore\PMAlign\ShapeTrainer.cpp;D:\tunvision\mwwz-samples\toolai_build\visioncore_c.dir\Release\ShapeTrainer.obj
+D:\tunvision\ToolAI\VisionCore\PMAlign\SubpixelRefiner.cpp;D:\tunvision\mwwz-samples\toolai_build\visioncore_c.dir\Release\SubpixelRefiner.obj
+D:\tunvision\ToolAI\VisionCore\API\c_api.cpp;D:\tunvision\mwwz-samples\toolai_build\visioncore_c.dir\Release\c_api.obj

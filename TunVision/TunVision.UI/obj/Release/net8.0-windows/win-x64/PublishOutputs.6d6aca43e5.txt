@@ -1,0 +1,11 @@
+c:\Users\ngocnv\Downloads\demo_mfc_x86_2026.11.06\TunVision\TunVision.UI.exe
+c:\Users\ngocnv\Downloads\demo_mfc_x86_2026.11.06\TunVision\TunVision.UI.dll
+c:\Users\ngocnv\Downloads\demo_mfc_x86_2026.11.06\TunVision\TunVision.UI.deps.json
+c:\Users\ngocnv\Downloads\demo_mfc_x86_2026.11.06\TunVision\TunVision.UI.runtimeconfig.json
+c:\Users\ngocnv\Downloads\demo_mfc_x86_2026.11.06\TunVision\TunVision.UI.pdb
+c:\Users\ngocnv\Downloads\demo_mfc_x86_2026.11.06\TunVision\OpenCvSharp.dll
+c:\Users\ngocnv\Downloads\demo_mfc_x86_2026.11.06\TunVision\zxing.dll
+c:\Users\ngocnv\Downloads\demo_mfc_x86_2026.11.06\TunVision\OpenCvSharpExtern.dll
+c:\Users\ngocnv\Downloads\demo_mfc_x86_2026.11.06\TunVision\opencv_videoio_ffmpeg4100_64.dll
+c:\Users\ngocnv\Downloads\demo_mfc_x86_2026.11.06\TunVision\TunVision.Core.dll
+c:\Users\ngocnv\Downloads\demo_mfc_x86_2026.11.06\TunVision\TunVision.Core.pdb

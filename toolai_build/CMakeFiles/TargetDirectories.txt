@@ -1,0 +1,9 @@
+D:/tunvision/mwwz-samples/toolai_build/CMakeFiles/visioncore.dir
+D:/tunvision/mwwz-samples/toolai_build/CMakeFiles/visioncore_c.dir
+D:/tunvision/mwwz-samples/toolai_build/CMakeFiles/visioncore_smoke_test.dir
+D:/tunvision/mwwz-samples/toolai_build/CMakeFiles/real_bench.dir
+D:/tunvision/mwwz-samples/toolai_build/CMakeFiles/simd_bench.dir
+D:/tunvision/mwwz-samples/toolai_build/CMakeFiles/phase11_perf_bench.dir
+D:/tunvision/mwwz-samples/toolai_build/CMakeFiles/visioncore_py.dir
+D:/tunvision/mwwz-samples/toolai_build/CMakeFiles/ALL_BUILD.dir
+D:/tunvision/mwwz-samples/toolai_build/CMakeFiles/ZERO_CHECK.dir

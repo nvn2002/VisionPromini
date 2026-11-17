@@ -1,0 +1,14 @@
+{
+    "version": 1,
+    "revision": 0,
+    "rules": [
+        {
+            "primary-output": "demo\\x64\\Debug\\executor2.obj",
+            "outputs": [
+                "demo\\x64\\Debug\\executor2.cpp.obj.dt.module.json",
+                "demo\\x64\\Debug\\executor2.cpp.obj.dt.d.json"
+            ],
+            "requires": []
+        }
+    ]
+}

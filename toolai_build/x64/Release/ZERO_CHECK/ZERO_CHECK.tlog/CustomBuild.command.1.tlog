@@ -1,0 +1,10 @@
+^D:\TUNVISION\MWWZ-SAMPLES\TOOLAI_BUILD\CMAKEFILES\AD042CB1024A758A9142DED67D3991B1\GENERATE.STAMP.RULE
+setlocal
+"C:\Program Files\CMake\bin\cmake.exe" -SD:/tunvision/ToolAI -BD:/tunvision/mwwz-samples/toolai_build --check-stamp-list CMakeFiles/generate.stamp.list --vs-solution-file D:/tunvision/mwwz-samples/toolai_build/VisionProMini.slnx
+if %errorlevel% neq 0 goto :cmEnd
+:cmEnd
+endlocal & call :cmErrorLevel %errorlevel% & goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd

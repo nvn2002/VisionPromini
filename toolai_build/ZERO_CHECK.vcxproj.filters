@@ -1,0 +1,13 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="18.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <CustomBuild Include="D:\tunvision\mwwz-samples\toolai_build\CMakeFiles\ad042cb1024a758a9142ded67d3991b1\generate.stamp.rule">
+      <Filter>CMake Rules</Filter>
+    </CustomBuild>
+  </ItemGroup>
+  <ItemGroup>
+    <Filter Include="CMake Rules">
+      <UniqueIdentifier>{AEE863DC-F81E-3A6D-8492-0DCAACDE1204}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+</Project>

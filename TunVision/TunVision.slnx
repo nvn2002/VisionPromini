@@ -1,0 +1,5 @@
+<Solution>
+  <Project Path="TunVision.Core/TunVision.Core.csproj" />
+  <Project Path="TunVision.Tests/TunVision.Tests.csproj" />
+  <Project Path="TunVision.UI/TunVision.UI.csproj" />
+</Solution>

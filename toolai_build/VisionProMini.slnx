@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Solution>
+	<Configurations>
+		<BuildType Name="Debug"/>
+		<BuildType Name="Release"/>
+		<BuildType Name="MinSizeRel"/>
+		<BuildType Name="RelWithDebInfo"/>
+		<Platform Name="x64"/>
+	</Configurations>
+	<Project Path="ALL_BUILD.vcxproj" Type="8bc9ceb8-8b4a-11d0-8d11-00a0c91bc942" Id="f44b711e-4dce-30a5-bccd-a31cd25caa23" DefaultStartup="true">
+		<BuildDependency Project="ZERO_CHECK.vcxproj"/>
+		<BuildDependency Project="phase11_perf_bench.vcxproj"/>
+		<BuildDependency Project="real_bench.vcxproj"/>
+		<BuildDependency Project="simd_bench.vcxproj"/>
+		<BuildDependency Project="visioncore.vcxproj"/>
+		<BuildDependency Project="visioncore_c.vcxproj"/>
+		<BuildDependency Project="visioncore_py.vcxproj"/>
+		<BuildDependency Project="visioncore_smoke_test.vcxproj"/>
+		<Build Solution="Debug|*" Project="false"/>
+		<Build Solution="Release|*" Project="false"/>
+		<Build Solution="MinSizeRel|*" Project="false"/>
+		<Build Solution="RelWithDebInfo|*" Project="false"/>
+	</Project>
+	<Project Path="ZERO_CHECK.vcxproj" Type="8bc9ceb8-8b4a-11d0-8d11-00a0c91bc942" Id="317dbf7a-aca6-3354-88a6-aaad85920e67"/>
+	<Project Path="phase11_perf_bench.vcxproj" Type="8bc9ceb8-8b4a-11d0-8d11-00a0c91bc942" Id="17944cf3-4541-36d4-b8a2-ff36a6ca6d5a">
+		<BuildDependency Project="ZERO_CHECK.vcxproj"/>
+		<BuildDependency Project="visioncore.vcxproj"/>
+	</Project>
+	<Project Path="real_bench.vcxproj" Type="8bc9ceb8-8b4a-11d0-8d11-00a0c91bc942" Id="c7a5f928-702b-3d69-a5f8-14f36f7b4e73">
+		<BuildDependency Project="ZERO_CHECK.vcxproj"/>
+		<BuildDependency Project="visioncore.vcxproj"/>
+	</Project>
+	<Project Path="simd_bench.vcxproj" Type="8bc9ceb8-8b4a-11d0-8d11-00a0c91bc942" Id="1ae73947-f44f-3b55-a220-8c6aedad8f4d">
+		<BuildDependency Project="ZERO_CHECK.vcxproj"/>
+		<BuildDependency Project="visioncore.vcxproj"/>
+	</Project>
+	<Project Path="visioncore.vcxproj" Type="8bc9ceb8-8b4a-11d0-8d11-00a0c91bc942" Id="181df410-db54-3ca2-aab0-5dc9891f111d">
+		<BuildDependency Project="ZERO_CHECK.vcxproj"/>
+	</Project>
+	<Project Path="visioncore_c.vcxproj" Type="8bc9ceb8-8b4a-11d0-8d11-00a0c91bc942" Id="b6860d7c-1583-3e95-90b1-892e08bae30a">
+		<BuildDependency Project="ZERO_CHECK.vcxproj"/>
+	</Project>
+	<Project Path="visioncore_py.vcxproj" Type="8bc9ceb8-8b4a-11d0-8d11-00a0c91bc942" Id="3e4c2a4d-b641-3d92-ae99-193e295cc0f6">
+		<BuildDependency Project="ZERO_CHECK.vcxproj"/>
+		<BuildDependency Project="visioncore.vcxproj"/>
+	</Project>
+	<Project Path="visioncore_smoke_test.vcxproj" Type="8bc9ceb8-8b4a-11d0-8d11-00a0c91bc942" Id="fb0226ab-115d-3744-99cf-88c987837019">
+		<BuildDependency Project="ZERO_CHECK.vcxproj"/>
+		<BuildDependency Project="visioncore.vcxproj"/>
+	</Project>
+</Solution>

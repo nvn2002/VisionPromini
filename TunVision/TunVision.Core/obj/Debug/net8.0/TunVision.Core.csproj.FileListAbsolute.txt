@@ -1,0 +1,13 @@
+d:\tunvision\mwwz-samples\TunVision\TunVision.Core\bin\Debug\net8.0\TunVision.Core.deps.json
+d:\tunvision\mwwz-samples\TunVision\TunVision.Core\bin\Debug\net8.0\TunVision.Core.dll
+d:\tunvision\mwwz-samples\TunVision\TunVision.Core\bin\Debug\net8.0\TunVision.Core.pdb
+d:\tunvision\mwwz-samples\TunVision\TunVision.Core\obj\Debug\net8.0\TunVision.Core.csproj.AssemblyReference.cache
+d:\tunvision\mwwz-samples\TunVision\TunVision.Core\obj\Debug\net8.0\TunVision.Core.GeneratedMSBuildEditorConfig.editorconfig
+d:\tunvision\mwwz-samples\TunVision\TunVision.Core\obj\Debug\net8.0\TunVision.Core.AssemblyInfoInputs.cache
+d:\tunvision\mwwz-samples\TunVision\TunVision.Core\obj\Debug\net8.0\TunVision.Core.AssemblyInfo.cs
+d:\tunvision\mwwz-samples\TunVision\TunVision.Core\obj\Debug\net8.0\TunVision.Core.csproj.CoreCompileInputs.cache
+d:\tunvision\mwwz-samples\TunVision\TunVision.Core\obj\Debug\net8.0\TunVision.Core.dll
+d:\tunvision\mwwz-samples\TunVision\TunVision.Core\obj\Debug\net8.0\refint\TunVision.Core.dll
+d:\tunvision\mwwz-samples\TunVision\TunVision.Core\obj\Debug\net8.0\TunVision.Core.pdb
+d:\tunvision\mwwz-samples\TunVision\TunVision.Core\obj\Debug\net8.0\ref\TunVision.Core.dll
+d:\tunvision\mwwz-samples\TunVision\TunVision.Core\obj\Debug\net8.0\TunVision.Core.sourcelink.json

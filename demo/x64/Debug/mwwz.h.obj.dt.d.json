@@ -1,0 +1,12 @@
+{
+    "Version": "1.2",
+    "Data": {
+        "Source": "d:\\tunvision\\mwwz-samples\\mwwz.h",
+        "ProvidedModule": "",
+        "Includes": [
+            "d:\\tunvision\\mwwz-samples\\apiexport.h"
+        ],
+        "ImportedModules": [],
+        "ImportedHeaderUnits": []
+    }
+}

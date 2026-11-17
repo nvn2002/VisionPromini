@@ -1,0 +1,461 @@
+<Window x:Class="TunVision.UI.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:controls="clr-namespace:TunVision.UI.Controls"
+        xmlns:vm="clr-namespace:TunVision.UI.ViewModels"
+        mc:Ignorable="d"
+        Title="{Binding Loc.WindowTitle}"
+        Height="660" Width="1120"
+        MinHeight="500" MinWidth="860"
+        Background="#18181B" Foreground="#DCDCE0"
+        WindowStartupLocation="CenterScreen">
+
+    <Window.Resources>
+        <SolidColorBrush x:Key="PanelBackground" Color="#1F1F23" />
+        <SolidColorBrush x:Key="HeaderBackground" Color="#25252A" />
+        <SolidColorBrush x:Key="BorderBrush" Color="#383840" />
+        <SolidColorBrush x:Key="OrangeAccent" Color="#E67E22" />
+        <SolidColorBrush x:Key="OrangeButtonBg" Color="#C85A00" />
+        <SolidColorBrush x:Key="TextPrimary" Color="#F0F0F5" />
+        <SolidColorBrush x:Key="TextSecondary" Color="#A0A0AB" />
+
+        <BooleanToVisibilityConverter x:Key="BoolToVis" />
+
+        <Style TargetType="TextBlock">
+            <Setter Property="Foreground" Value="{StaticResource TextPrimary}" />
+            <Setter Property="VerticalAlignment" Value="Center" />
+            <Setter Property="FontSize" Value="11.5" />
+        </Style>
+
+        <Style TargetType="TextBox">
+            <Setter Property="Background" Value="#141417" />
+            <Setter Property="Foreground" Value="#FFFFFF" />
+            <Setter Property="BorderBrush" Value="#484852" />
+            <Setter Property="Padding" Value="5,3" />
+            <Setter Property="VerticalAlignment" Value="Center" />
+        </Style>
+
+        <Style TargetType="Button">
+            <Setter Property="Background" Value="#2D2D34" />
+            <Setter Property="Foreground" Value="#FFFFFF" />
+            <Setter Property="BorderBrush" Value="#50505A" />
+            <Setter Property="BorderThickness" Value="1" />
+            <Setter Property="Padding" Value="8,4" />
+            <Setter Property="Margin" Value="2,1" />
+            <Setter Property="FontSize" Value="11.5" />
+            <Setter Property="FontWeight" Value="SemiBold" />
+            <Setter Property="Cursor" Value="Hand" />
+        </Style>
+
+        <!-- Industrial Orange Toolbar Button Style matching the reference video -->
+        <Style x:Key="ToolbarOrangeBtn" TargetType="Button" BasedOn="{StaticResource {x:Type Button}}">
+            <Setter Property="Background" Value="#3A2410" />
+            <Setter Property="BorderBrush" Value="#D35400" />
+            <Setter Property="Foreground" Value="#FFD8A8" />
+            <Setter Property="Padding" Value="9,4" />
+        </Style>
+
+        <Style TargetType="CheckBox">
+            <Setter Property="Foreground" Value="#E0E0E5" />
+            <Setter Property="VerticalAlignment" Value="Center" />
+            <Setter Property="Margin" Value="5,0" />
+            <Setter Property="FontSize" Value="11.5" />
+        </Style>
+
+        <Style TargetType="RadioButton">
+            <Setter Property="Foreground" Value="#E0E0E5" />
+            <Setter Property="VerticalAlignment" Value="Center" />
+            <Setter Property="Margin" Value="5,0" />
+            <Setter Property="FontSize" Value="11.5" />
+            <Setter Property="Cursor" Value="Hand" />
+        </Style>
+    </Window.Resources>
+
+    <Window.InputBindings>
+        <KeyBinding Key="F5" Command="{Binding RunPipelineCommand}" />
+        <KeyBinding Key="Z" Modifiers="Ctrl" Command="{Binding UndoEraseCommand}" />
+    </Window.InputBindings>
+
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" /> <!-- Row 0: Top Industrial Toolbar -->
+            <RowDefinition Height="*" />    <!-- Row 1: 3-Part Main Layout -->
+            <RowDefinition Height="24" />   <!-- Row 2: Bottom Status Bar -->
+        </Grid.RowDefinitions>
+
+        <!-- ==================== 1. TOP TOOLBAR (Smart Vision Industrial Bar) ==================== -->
+        <Border Grid.Row="0" Background="#222226" BorderBrush="#383840" BorderThickness="0,0,0,1" Padding="6,4">
+            <DockPanel LastChildFill="False">
+                <!-- New Pipeline Dropdown Button -->
+                <Button x:Name="NewPipelineBtn" Click="OnNewPipelineDropDownClick" Style="{StaticResource ToolbarOrangeBtn}">
+                    <StackPanel Orientation="Horizontal">
+                        <TextBlock Text="📄 Mới" Foreground="#FFD8A8" FontWeight="SemiBold" />
+                        <TextBlock Text=" ▾" Foreground="#FFA500" FontWeight="Bold" />
+                    </StackPanel>
+                    <Button.ContextMenu>
+                        <ContextMenu Background="#25252B" Foreground="#FFFFFF" BorderBrush="#E67E22" BorderThickness="1" Padding="4">
+                            <MenuItem Header="{Binding Loc.MenuBlankTitle}"
+                                      Command="{Binding SelectPipelinePresetCommand}"
+                                      CommandParameter="blank"
+                                      Foreground="#FFFFFF" Background="#25252B" Padding="8,6" FontWeight="SemiBold" />
+                            <Separator Background="#3E3E44" />
+                            <MenuItem Header="{Binding Loc.MenuMetrologyProTitle}"
+                                      Command="{Binding SelectPipelinePresetCommand}"
+                                      CommandParameter="metrology"
+                                      Foreground="#FFA500" Background="#25252B" Padding="8,6" FontWeight="SemiBold" />
+                            <MenuItem Header="{Binding Loc.MenuDetectTitle}"
+                                      Command="{Binding SelectPipelinePresetCommand}"
+                                      CommandParameter="detect"
+                                      Foreground="#00FF88" Background="#25252B" Padding="8,6" FontWeight="SemiBold" />
+                            <MenuItem Header="{Binding Loc.MenuMeasureTitle}"
+                                      Command="{Binding SelectPipelinePresetCommand}"
+                                      CommandParameter="measure"
+                                      Foreground="#00E5FF" Background="#25252B" Padding="8,6" FontWeight="SemiBold" />
+                            <MenuItem Header="{Binding Loc.MenuBlobTitle}"
+                                      Command="{Binding SelectPipelinePresetCommand}"
+                                      CommandParameter="blob"
+                                      Foreground="#FFD700" Background="#25252B" Padding="8,6" FontWeight="SemiBold" />
+                            <MenuItem Header="{Binding Loc.MenuCodeTitle}"
+                                      Command="{Binding SelectPipelinePresetCommand}"
+                                      CommandParameter="code"
+                                      Foreground="#FF9800" Background="#25252B" Padding="8,6" FontWeight="SemiBold" />
+                        </ContextMenu>
+                    </Button.ContextMenu>
+                </Button>
+
+                <Button Content="📂 Mở..." Command="{Binding OpenProjectCommand}" Style="{StaticResource ToolbarOrangeBtn}" />
+                <Button Content="💾 Lưu..." Command="{Binding SaveProjectCommand}" Style="{StaticResource ToolbarOrangeBtn}" />
+                <Button Content="🖼 Mở ảnh..." Command="{Binding OpenImageCommand}" Style="{StaticResource ToolbarOrangeBtn}" />
+
+                <Rectangle Width="1" Height="20" Fill="#44444C" Margin="5,0" VerticalAlignment="Center" />
+
+                <!-- Run / Stop / Continuous Loop -->
+                <Button Content="▶ Chạy (F5)" Command="{Binding RunPipelineCommand}" Background="#D35400" BorderBrush="#FF9800" Foreground="#FFFFFF" Padding="10,4" />
+                <Button Content="⏹ Dừng" Command="{Binding StopContinuousRunCommand}" Style="{StaticResource ToolbarOrangeBtn}" />
+                <Button Content="⟳ Chạy liên tục" Command="{Binding StartContinuousRunCommand}" IsEnabled="{Binding IsNotContinuousRunning}" Style="{StaticResource ToolbarOrangeBtn}" />
+
+                <TextBlock Text="nghỉ" Margin="5,0,3,0" Foreground="#BBBBBB" />
+                <TextBox Text="{Binding ContinuousDelayMs, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Width="44" TextAlignment="Center" />
+                <TextBlock Text="ms" Margin="3,0,6,0" Foreground="#BBBBBB" />
+
+                <!-- Overlay & ROI / Caliper Toggles -->
+                <Border Background="#2D241C" BorderBrush="#8A4B18" BorderThickness="1" CornerRadius="3" Padding="4,2" Margin="2,1">
+                    <CheckBox Content="Chỉ vẽ overlay node đang chọn" IsChecked="{Binding ShowOnlySelectedNodeOverlay, Mode=TwoWay}" />
+                </Border>
+
+                <Button Content="✏ Vẽ ROI / caliper" Command="{Binding SetDrawRoiModeCommand}" Style="{StaticResource ToolbarOrangeBtn}" />
+
+                <Border Background="#2D241C" BorderBrush="#8A4B18" BorderThickness="1" CornerRadius="3" Padding="4,2" Margin="2,1">
+                    <CheckBox Content="Tự chạy lại khi thả chuột" IsChecked="{Binding AutoRerunOnMouseUp, Mode=TwoWay}" />
+                </Border>
+
+                <Button Content="Vừa khung" Click="OnFitAllClick" Style="{StaticResource ToolbarOrangeBtn}" />
+                <TextBlock Text="{Binding VisionZoomText}" Foreground="#BBBBBB" Margin="6,0,4,0" FontSize="11" />
+
+                <!-- Right-Docked Settings & Language Buttons -->
+                <StackPanel DockPanel.Dock="Right" Orientation="Horizontal" VerticalAlignment="Center">
+                    <Button Content="⚙ Cài đặt node" Command="{Binding OpenNodeSettingsCommand}" Background="#2B579A" BorderBrush="#4A89DC" Padding="8,4" ToolTip="Mở cửa sổ cài đặt thông số cho node đang chọn (hoặc nháy đúp vào node)" />
+                    <Button Content="🇻🇳 VI" Command="{Binding ToggleLanguageCommand}" CommandParameter="VI" Padding="6,3" Background="#1E5631" />
+                    <Button Content="🇬🇧 EN" Command="{Binding ToggleLanguageCommand}" CommandParameter="EN" Padding="6,3" Background="#2B579A" />
+                </StackPanel>
+            </DockPanel>
+        </Border>
+
+        <!-- ==================== 2. THREE-COLUMN BODY ==================== -->
+        <Grid Grid.Row="1">
+            <Grid.ColumnDefinitions>
+                <!-- Left Column: Công cụ (2-Column Square Tile Tool Library) -->
+                <ColumnDefinition Width="218" MinWidth="185" MaxWidth="290" />
+                <ColumnDefinition Width="3" />
+                <!-- Center Column: Full-Height DAG Node Graph Canvas -->
+                <ColumnDefinition Width="1.05*" MinWidth="320" />
+                <ColumnDefinition Width="3" />
+                <!-- Right Column: Top Image Preview + Context Bar, Bottom 2 Result Tables -->
+                <ColumnDefinition Width="1.15*" MinWidth="360" />
+            </Grid.ColumnDefinitions>
+
+            <!-- ==================== COLUMN 0: THƯ VIỆN THẺ CÔNG CỤ (2-COLUMN SQUARE CARDS) ==================== -->
+            <Border Grid.Column="0" Background="#1C1C20" BorderBrush="{StaticResource BorderBrush}" BorderThickness="0,0,1,0">
+                <DockPanel>
+                    <!-- Header: Công cụ -->
+                    <Border DockPanel.Dock="Top" Padding="10,7,10,4">
+                        <DockPanel>
+                            <TextBlock Text="Công cụ" FontWeight="Bold" Foreground="#E67E22" FontSize="13" />
+                            <StackPanel DockPanel.Dock="Right" Orientation="Horizontal" HorizontalAlignment="Right">
+                                <Button Content="Retainers" Command="{Binding LoadSamplePipelineCommand}" CommandParameter="retainers_01.png" FontSize="9.5" Padding="4,1" Margin="1,0" Background="#3B234A" />
+                                <Button Content="Cocoa" Command="{Binding LoadSamplePipelineCommand}" CommandParameter="cocoa_packages_05.png" FontSize="9.5" Padding="4,1" Margin="1,0" Background="#1B4343" />
+                                <Button Content="Rings" Command="{Binding LoadSamplePipelineCommand}" CommandParameter="rings_01.png" FontSize="9.5" Padding="4,1" Margin="1,0" />
+                            </StackPanel>
+                        </DockPanel>
+                    </Border>
+
+                    <!-- Search Box: Tìm node theo tên hoặc từ khóa -->
+                    <Border DockPanel.Dock="Top" Margin="8,2,8,6" Background="#131316" BorderBrush="#383842" BorderThickness="1" CornerRadius="5" Padding="6,3">
+                        <Grid>
+                            <TextBlock Text="Tìm node theo tên hoặc từ khóa" Foreground="#686872" FontSize="11" IsHitTestVisible="False">
+                                <TextBlock.Style>
+                                    <Style TargetType="TextBlock">
+                                        <Setter Property="Visibility" Value="Collapsed" />
+                                        <Style.Triggers>
+                                            <DataTrigger Binding="{Binding Text, ElementName=PaletteSearchBox}" Value="">
+                                                <Setter Property="Visibility" Value="Visible" />
+                                            </DataTrigger>
+                                        </Style.Triggers>
+                                    </Style>
+                                </TextBlock.Style>
+                            </TextBlock>
+                            <TextBox x:Name="PaletteSearchBox"
+                                     Text="{Binding PaletteSearchText, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                                     Background="Transparent" BorderThickness="0" Padding="0" Foreground="#E0E0E5" FontSize="11.5" />
+                        </Grid>
+                    </Border>
+
+                    <!-- Grouped Collapsible Tool Categories with 2-Column Icon Cards -->
+                    <ScrollViewer VerticalScrollBarVisibility="Auto" Padding="4,0,4,8">
+                        <ItemsControl ItemsSource="{Binding PaletteGroups}">
+                            <ItemsControl.ItemTemplate>
+                                <DataTemplate>
+                                    <Expander IsExpanded="True" Margin="0,2,0,4" Background="Transparent" BorderThickness="0">
+                                        <Expander.Header>
+                                            <StackPanel Orientation="Horizontal" Margin="2,2">
+                                                <TextBlock Text="{Binding GroupTitle}" FontWeight="Bold" Foreground="#D8D8E0" FontSize="11.5" />
+                                                <TextBlock Text="{Binding Count}" Foreground="#777782" FontSize="11" Margin="6,0,0,0" />
+                                            </StackPanel>
+                                        </Expander.Header>
+                                        <ItemsControl ItemsSource="{Binding Items}" Margin="0,2,0,0">
+                                            <ItemsControl.ItemsPanel>
+                                                <ItemsPanelTemplate>
+                                                    <UniformGrid Columns="2" />
+                                                </ItemsPanelTemplate>
+                                            </ItemsControl.ItemsPanel>
+                                            <ItemsControl.ItemTemplate>
+                                                <DataTemplate>
+                                                    <Border x:Name="ToolTileBorder"
+                                                            Height="74" Margin="3"
+                                                            Background="#232328"
+                                                            BorderBrush="#3C3C44"
+                                                            BorderThickness="1.2"
+                                                            CornerRadius="6"
+                                                            Padding="4,6"
+                                                            Cursor="Hand"
+                                                            ToolTip="{Binding Description}">
+                                                        <Border.InputBindings>
+                                                            <MouseBinding Gesture="LeftClick"
+                                                                          Command="{Binding DataContext.AddNodeCommand, RelativeSource={RelativeSource AncestorType=Window}}"
+                                                                          CommandParameter="{Binding}" />
+                                                        </Border.InputBindings>
+                                                        <Grid>
+                                                            <Grid.RowDefinitions>
+                                                                <RowDefinition Height="32" />
+                                                                <RowDefinition Height="*" />
+                                                            </Grid.RowDefinitions>
+                                                            <!-- Vector Tool Icon -->
+                                                            <Path Grid.Row="0"
+                                                                  Data="{Binding IconGeometry}"
+                                                                  Stroke="#E69545"
+                                                                  StrokeThickness="1.6"
+                                                                  Stretch="Uniform"
+                                                                  Width="23" Height="23"
+                                                                  HorizontalAlignment="Center"
+                                                                  VerticalAlignment="Center" />
+                                                            <!-- Tool Name -->
+                                                            <TextBlock Grid.Row="1"
+                                                                       Text="{Binding ShortTitle}"
+                                                                       FontSize="10.5"
+                                                                       Foreground="#E2E2E8"
+                                                                       TextAlignment="Center"
+                                                                       TextWrapping="Wrap"
+                                                                       HorizontalAlignment="Center"
+                                                                       VerticalAlignment="Center"
+                                                                       LineHeight="12.5" />
+                                                        </Grid>
+                                                    </Border>
+                                                    <DataTemplate.Triggers>
+                                                        <Trigger SourceName="ToolTileBorder" Property="IsMouseOver" Value="True">
+                                                            <Setter TargetName="ToolTileBorder" Property="BorderBrush" Value="#E67E22" />
+                                                            <Setter TargetName="ToolTileBorder" Property="Background" Value="#2E251D" />
+                                                        </Trigger>
+                                                    </DataTemplate.Triggers>
+                                                </DataTemplate>
+                                            </ItemsControl.ItemTemplate>
+                                        </ItemsControl>
+                                    </Expander>
+                                </DataTemplate>
+                            </ItemsControl.ItemTemplate>
+                        </ItemsControl>
+                    </ScrollViewer>
+                </DockPanel>
+            </Border>
+
+            <GridSplitter Grid.Column="1" HorizontalAlignment="Stretch" Background="#2A2A30" />
+
+            <!-- ==================== COLUMN 2: FULL-HEIGHT DAG NODE GRAPH CANVAS ==================== -->
+            <Grid Grid.Column="2" Background="#141417">
+                <controls:GraphCanvasControl x:Name="GraphCanvasCtrl" ViewModel="{Binding}" />
+
+                <!-- Top-Left Coordinate & Instruction Overlay (matching "X: 521 - Y: 982" in the video) -->
+                <Border HorizontalAlignment="Left" VerticalAlignment="Top" Margin="10,8"
+                        Background="#B816161A" CornerRadius="4" Padding="8,4" IsHitTestVisible="False">
+                    <StackPanel Orientation="Horizontal">
+                        <TextBlock Text="{Binding GraphCursorText}" Foreground="#D8D8E0" FontWeight="SemiBold" FontSize="11.5" Margin="0,0,14,0" />
+                        <TextBlock Text="Nháy đúp vào thẻ để mở cửa sổ Cài đặt | Ctrl+Kéo: Chọn nhiều thẻ" Foreground="#888892" FontSize="10.5" />
+                    </StackPanel>
+                </Border>
+
+                <!-- Bottom-Right Fit Button next to Minimap -->
+                <Button HorizontalAlignment="Right" VerticalAlignment="Bottom" Margin="152,0,152,12"
+                        Content="⛶" Click="OnFitGraphClick"
+                        Width="30" Height="28" Padding="0"
+                        Background="#282830" BorderBrush="#A86420" Foreground="#E69545"
+                        ToolTip="Vừa khung sơ đồ node (hoặc nháy đúp vào nền trống)" />
+            </Grid>
+
+            <GridSplitter Grid.Column="3" HorizontalAlignment="Stretch" Background="#2A2A30" />
+
+            <!-- ==================== COLUMN 4: RIGHT PANEL (TOP = CONTEXT BAR + IMAGE, BOTTOM = 2 TABLES) ==================== -->
+            <Grid Grid.Column="4" Background="#18181C">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="*" MinHeight="220" />
+                    <RowDefinition Height="3" />
+                    <RowDefinition Height="195" MinHeight="110" />
+                </Grid.RowDefinitions>
+
+                <!-- Top Part of Right Column: Context Toolbar + Live Image Preview -->
+                <DockPanel Grid.Row="0">
+                    <!-- 2-Row Context Action Bar (matching "Contour Matching: (•) Chọn ROI ( ) Xóa cọ ( ) Xóa khung [Tạo template từ ROI]...") -->
+                    <Border DockPanel.Dock="Top" Background="#222227" BorderBrush="#383840" BorderThickness="0,0,0,1" Padding="8,5">
+                        <StackPanel>
+                            <!-- Row 1: Mode Selection & Template Creation -->
+                            <WrapPanel VerticalAlignment="Center" Margin="0,0,0,4">
+                                <TextBlock Text="Contour Matching:" FontWeight="Bold" Foreground="#FFFFFF" Margin="0,0,6,0" />
+                                <RadioButton GroupName="CanvasModeGroup" Content="Chọn ROI" IsChecked="{Binding IsDrawRoiMode, Mode=TwoWay}" />
+                                <RadioButton GroupName="CanvasModeGroup" Content="Kéo Gizmo / Pan" IsChecked="{Binding IsPanOrGizmoMode, Mode=TwoWay}" />
+                                <RadioButton GroupName="CanvasModeGroup" Content="Xóa cọ" IsChecked="{Binding IsBrushEraseMode, Mode=TwoWay}" />
+                                <RadioButton GroupName="CanvasModeGroup" Content="Xóa khung" IsChecked="{Binding IsBoxEraseMode, Mode=TwoWay}" />
+                                <Button Content="Tạo template từ ROI" Command="{Binding TrainModelNowCommand}" Padding="8,2" Margin="6,0,2,0" Background="#32323A" />
+                                <Button Content="⚙ Cài đặt node..." Command="{Binding OpenNodeSettingsCommand}" Padding="8,2" Margin="4,0,0,0" Background="#3A2410" BorderBrush="#D35400" Foreground="#FFD8A8" />
+                                <TextBlock Text="Lớp phủ:" FontWeight="SemiBold" Foreground="#A0A0AA" Margin="10,0,4,0" VerticalAlignment="Center" FontSize="11" />
+                                <ComboBox ItemsSource="{Binding AvailableOverlayDrawModes}"
+                                          SelectedItem="{Binding OverlayDrawMode, Mode=TwoWay}"
+                                          Width="96" Height="22" VerticalAlignment="Center" FontSize="11" />
+                            </WrapPanel>
+
+                            <!-- Row 2: Template Operations & Quick Image Stepping -->
+                            <WrapPanel VerticalAlignment="Center">
+                                <Button Content="Hiện điểm template" Command="{Binding ToggleShowTemplateFeaturesCommand}" Padding="7,2" FontSize="11" />
+                                <Button Content="Hoàn tác (Ctrl+Z)" Command="{Binding UndoEraseCommand}" Padding="7,2" FontSize="11" />
+                                <Button Content="Khôi phục điểm" Command="{Binding ResetModelCommand}" Padding="7,2" FontSize="11" />
+                                <Button Content="Lưu template..." Command="{Binding SaveModelFileCommand}" Padding="7,2" FontSize="11" />
+                                <Button Content="Mở template..." Command="{Binding BrowseModelFileCommand}" Padding="7,2" FontSize="11" />
+                                <Button Content="Đặt gốc = kết quả khớp gần nhất" Command="{Binding SetOriginFromMatchCommand}" Padding="7,2" FontSize="11" />
+                                <Button Content="◀ Ảnh trước" Command="{Binding PrevSourceImageCommand}" Padding="6,2" FontSize="11" Margin="6,1,2,1" />
+                                <Button Content="Ảnh sau ▶" Command="{Binding NextSourceImageCommand}" Padding="6,2" FontSize="11" />
+                            </WrapPanel>
+                        </StackPanel>
+                    </Border>
+
+                    <!-- VisionCanvas + Floating Verdict Pill (Top-Right) + Helper Prompt (Bottom) -->
+                    <Grid Background="#141416">
+                        <controls:VisionCanvas x:Name="VisionCanvasCtrl" ViewModel="{Binding}" OverlayDrawMode="{Binding OverlayDrawMode, Mode=TwoWay}" PreviewTemporaryContours="{Binding PreviewTemporaryContours, Mode=OneWay}" />
+
+                        <!-- Floating Top-Right Verdict & Execution Time Badge (matching "OK 75 ms" in the video) -->
+                        <Border HorizontalAlignment="Right" VerticalAlignment="Top" Margin="14,12"
+                                Background="{Binding VerdictBadgeBackground}"
+                                BorderBrush="{Binding VerdictBadgeForeground}"
+                                BorderThickness="1.2" CornerRadius="8" Padding="14,6"
+                                IsHitTestVisible="False">
+                            <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
+                                <TextBlock Text="{Binding VerdictShortText}"
+                                           Foreground="{Binding VerdictBadgeForeground}"
+                                           FontWeight="Bold" FontSize="22" Margin="0,0,8,0" />
+                                <TextBlock Text="{Binding TotalExecutionTimeMs, StringFormat={}{0:F0} ms}"
+                                           Foreground="#D0D0D8" FontSize="12.5" VerticalAlignment="Bottom" Margin="0,0,0,3" />
+                            </StackPanel>
+                        </Border>
+
+                        <!-- Floating Bottom Instruction Bar -->
+                        <Border HorizontalAlignment="Stretch" VerticalAlignment="Bottom"
+                                Background="#D816161A" BorderBrush="#2E2E36" BorderThickness="0,1,0,0"
+                                Padding="10,6" IsHitTestVisible="False">
+                            <TextBlock Text="Kéo chuột trên ảnh để chọn ROI quanh vật mẫu (tối thiểu 16×16 px), rồi bấm &quot;Tạo template từ ROI&quot;. Nháy đúp vào nền ảnh để vừa khung."
+                                       Foreground="#D8B078" FontSize="11" TextWrapping="Wrap" />
+                        </Border>
+                    </Grid>
+                </DockPanel>
+
+                <GridSplitter Grid.Row="1" HorizontalAlignment="Stretch" Background="#2A2A30" />
+
+                <!-- Bottom Part of Right Column: Split 2 Side-by-Side Result Tables -->
+                <Grid Grid.Row="2" Background="#1A1A1E">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="1.2*" />
+                        <ColumnDefinition Width="3" />
+                        <ColumnDefinition Width="1*" />
+                    </Grid.ColumnDefinitions>
+
+                    <!-- Left Table: Node | KQ | ms | Ghi chú -->
+                    <DataGrid Grid.Column="0"
+                              ItemsSource="{Binding GraphNodes}"
+                              SelectedItem="{Binding SelectedNode, Mode=TwoWay}"
+                              MouseDoubleClick="OnNodeTableDoubleClick"
+                              AutoGenerateColumns="False" IsReadOnly="True" HeadersVisibility="Column"
+                              Background="#1A1A1E" RowBackground="#202025" AlternatingRowBackground="#1C1C21"
+                              Foreground="#E8E8EE" BorderThickness="0" GridLinesVisibility="Horizontal"
+                              HorizontalGridLinesBrush="#2C2C34" VerticalGridLinesBrush="#2C2C34" FontSize="11.5">
+                        <DataGrid.Resources>
+                            <Style TargetType="DataGridColumnHeader">
+                                <Setter Property="Background" Value="#25252B" />
+                                <Setter Property="Foreground" Value="#A8A8B4" />
+                                <Setter Property="FontWeight" Value="SemiBold" />
+                                <Setter Property="Padding" Value="8,5" />
+                                <Setter Property="BorderBrush" Value="#363640" />
+                                <Setter Property="BorderThickness" Value="0,0,1,1" />
+                            </Style>
+                        </DataGrid.Resources>
+                        <DataGrid.Columns>
+                            <DataGridTextColumn Header="Node" Binding="{Binding Title}" Width="140" />
+                            <DataGridTextColumn Header="KQ" Binding="{Binding StatusShort}" Width="42" />
+                            <DataGridTextColumn Header="ms" Binding="{Binding ExecutionTimeMs, StringFormat={}{0:F1}}" Width="50" />
+                            <DataGridTextColumn Header="Ghi chú" Binding="{Binding LastResult}" Width="*" />
+                        </DataGrid.Columns>
+                    </DataGrid>
+
+                    <GridSplitter Grid.Column="1" HorizontalAlignment="Stretch" Background="#2A2A30" />
+
+                    <!-- Right Table: Số đo (node đang chọn) | Giá trị -->
+                    <DataGrid Grid.Column="2"
+                              ItemsSource="{Binding SelectedNodeMeasurements}"
+                              AutoGenerateColumns="False" IsReadOnly="True" HeadersVisibility="Column"
+                              Background="#1A1A1E" RowBackground="#202025" AlternatingRowBackground="#1C1C21"
+                              Foreground="#E8E8EE" BorderThickness="0" GridLinesVisibility="Horizontal"
+                              HorizontalGridLinesBrush="#2C2C34" VerticalGridLinesBrush="#2C2C34" FontSize="11.5">
+                        <DataGrid.Resources>
+                            <Style TargetType="DataGridColumnHeader">
+                                <Setter Property="Background" Value="#25252B" />
+                                <Setter Property="Foreground" Value="#A8A8B4" />
+                                <Setter Property="FontWeight" Value="SemiBold" />
+                                <Setter Property="Padding" Value="8,5" />
+                                <Setter Property="BorderBrush" Value="#363640" />
+                                <Setter Property="BorderThickness" Value="0,0,1,1" />
+                            </Style>
+                        </DataGrid.Resources>
+                        <DataGrid.Columns>
+                            <DataGridTextColumn Header="Số đo (node đang chọn)" Binding="{Binding Key}" Width="145" />
+                            <DataGridTextColumn Header="Giá trị" Binding="{Binding DisplayValue}" Width="*" />
+                        </DataGrid.Columns>
+                    </DataGrid>
+                </Grid>
+            </Grid>
+        </Grid>
+
+        <!-- ==================== 3. BOTTOM STATUS BAR ==================== -->
+        <Border Grid.Row="2" Background="#202025" BorderBrush="#383840" BorderThickness="0,1,0,0" Padding="10,2">
+            <DockPanel>
+                <TextBlock Text="{Binding StatusMessage}" FontSize="11" Foreground="#CCCCCC" />
+                <TextBlock Text="Smart Vision / TunVision Studio — Nháy đúp vào thẻ node để mở cửa sổ Cài đặt riêng" HorizontalAlignment="Right" FontSize="11" Foreground="#777782" />
+            </DockPanel>
+        </Border>
+    </Grid>
+</Window>

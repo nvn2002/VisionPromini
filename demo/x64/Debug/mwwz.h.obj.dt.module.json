@@ -1,0 +1,14 @@
+{
+    "version": 1,
+    "revision": 0,
+    "rules": [
+        {
+            "primary-output": "demo\\x64\\Debug\\mwwz.obj",
+            "outputs": [
+                "demo\\x64\\Debug\\mwwz.h.obj.dt.module.json",
+                "demo\\x64\\Debug\\mwwz.h.obj.dt.d.json"
+            ],
+            "requires": []
+        }
+    ]
+}
